@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode, Pagination } from 'swiper/modules';
+import { FreeMode, Pagination, Navigation } from 'swiper/modules';
 
 
 import 'swiper/css';
@@ -25,10 +25,11 @@ const Category = () => {
                     slidesPerView={4}
                     spaceBetween={30}
                     freeMode={true}
+                    navigation={true} 
                     pagination={{
                         clickable: true,
                     }}
-                    modules={[Pagination, FreeMode]}
+                    modules={[Pagination, FreeMode, Navigation]}
                     className="mySwiper  relative"
                 >
                     <SwiperSlide>
