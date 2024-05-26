@@ -4,13 +4,13 @@ import './featured.css'
 
 const Featured = () => {
     return (
-        <div className="featured-item pt-10 pb-20 mt-20 ">
+        <div className="featured-item bg-fixed pt-10 pb-20 mt-20 text-white border-white ">
             <SectionTitle heading={"FROM OUR MENU"} subHeading={"Check it out"}></SectionTitle>
             <div className="flex  gap-10 items-center max-w-screen-xl w-11/12 mx-auto">
                 <div className="w-1/2">
                     <img src={img} className="w-full" alt="" />
                 </div>
-                <div className="space-y-4 w-1/2 text-white border-white">
+                <div className="space-y-4 w-1/2 ">
                     <h3>Aug 20, 2024</h3>
                     <h3 className="uppercase">Where can i get some?</h3>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta iusto aliquam odit nisi nihil ab rerum reiciendis, quisquam dignissimos asperiores, eveniet atque aut facere obcaecati saepe labore eligendi incidunt repellat?</p>
