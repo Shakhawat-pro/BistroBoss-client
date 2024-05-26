@@ -1,3 +1,4 @@
+import PopularMenu from "../../PopularMenu/PopularMenu";
 import Banner from "../Banner/Banner";
 import Category from "../Category/Category";
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
         <div>
             <Banner></Banner>     
             <Category></Category>       
+            <PopularMenu></PopularMenu>
         </div>
     );
 };
