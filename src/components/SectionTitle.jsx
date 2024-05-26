@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'; // ES6
+import PropTypes from 'prop-types'; 
 
 const SectionTitle = ({heading, subHeading}) => {
     return (
