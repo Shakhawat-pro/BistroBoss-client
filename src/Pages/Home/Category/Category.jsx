@@ -22,7 +22,7 @@ const Category = () => {
                 
                 ></SectionTitle>
                 <Swiper
-                    slidesPerView={4}
+                    slidesPerView={2}
                     spaceBetween={30}
                     freeMode={true}
                     navigation={true} 
@@ -31,26 +31,35 @@ const Category = () => {
                     }}
                     modules={[Pagination, FreeMode, Navigation]}
                     className="mySwiper  relative"
+                    breakpoints={{
+
+                        768: {
+                            slidesPerView: 3,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                        },
+                    }}
                 >
                     <SwiperSlide>
                         <img src={slide1} alt="" />
-                        <h3 className="text-4xl uppercase text-center absolute bottom-5 left-16 text-white">Salads</h3>
+                        <h3 className="max-sm:text-3xl text-4xl uppercase text-center absolute bottom-5 left-1/2 max-[370px]:-translate-x-12 -translate-x-[70px]  text-white">Salads</h3>
                     </SwiperSlide>
                     <SwiperSlide>
                         <img src={slide2} alt="" />
-                        <h3 className="text-4xl uppercase text-center absolute bottom-5 left-16 text-white">Pizzas</h3>
+                        <h3 className="max-sm:text-3xl text-4xl uppercase text-center absolute bottom-5 left-1/2 max-[370px]:-translate-x-12 -translate-x-[70px]  text-white">Pizzas</h3>
                     </SwiperSlide>
                     <SwiperSlide>
                         <img src={slide3} alt="" />
-                        <h3 className="text-4xl uppercase text-center absolute bottom-5 left-16 text-white">Soups</h3>
+                        <h3 className="max-sm:text-3xl text-4xl uppercase text-center absolute bottom-5 left-1/2 max-[370px]:-translate-x-12 -translate-x-[70px]  text-white">Soups</h3>
                     </SwiperSlide>
                     <SwiperSlide>
                         <img src={slide4} alt="" />
-                        <h3 className="text-4xl uppercase text-center absolute bottom-5 left-16 text-white">Desserts</h3>
+                        <h3 className="max-sm:text-3xl text-4xl uppercase text-center absolute bottom-5 left-1/2 max-[370px]:-translate-x-12 -translate-x-[70px]  text-white">Desserts</h3>
                     </SwiperSlide>
                     <SwiperSlide>
                         <img src={slide5} alt="" />
-                        <h3 className="text-4xl uppercase text-center absolute bottom-5 left-16 text-white">Salads</h3>
+                        <h3 className="max-sm:text-3xl text-4xl uppercase text-center absolute bottom-5 left-1/2 max-[370px]:-translate-x-12 -translate-x-[70px]  text-white">Salads</h3>
                     </SwiperSlide>
                 </Swiper>
             </section>
