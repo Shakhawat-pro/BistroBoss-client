@@ -8,7 +8,7 @@ const NavBar = () => {
         <li><NavLink to="/contact" className={'px-2'}>Contact Us</NavLink></li>
         <li><NavLink to="/dashboard" className={'px-2'}>Dashboard</NavLink></li>
         <li><NavLink to="/menu" className={'px-2'}>Our Menu</NavLink></li>
-        <li><NavLink to="/shop" className={'px-2'}>Our Shop</NavLink></li>
+        <li><NavLink to="/order" className={'px-2'}>Order Now</NavLink></li>
     </>;
 
 

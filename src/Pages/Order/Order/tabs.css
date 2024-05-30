@@ -1,0 +1,16 @@
+.react-tabs__tab-list {
+    display: flex;
+    justify-content: space-around;
+    border: none;
+}
+
+.react-tabs__tab {
+    font-size: 30px;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.react-tabs__tab--selected {
+    border: none;
+    color: #BB8506 !important;
+    border-bottom: 2px solid #BB8506 !important;
+}
