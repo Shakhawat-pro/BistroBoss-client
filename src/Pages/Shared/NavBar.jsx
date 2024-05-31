@@ -9,6 +9,7 @@ const NavBar = () => {
         <li><NavLink to="/dashboard" className={'px-2'}>Dashboard</NavLink></li>
         <li><NavLink to="/menu" className={'px-2'}>Our Menu</NavLink></li>
         <li><NavLink to="/order" className={'px-2'}>Order Now</NavLink></li>
+        <li><NavLink to="/login" className={'px-2'}>Login</NavLink></li>
     </>;
 
 
