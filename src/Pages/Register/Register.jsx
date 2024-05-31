@@ -17,11 +17,11 @@ const Register = () => {
     }
     return (
         <div className="hero min-h-screen" style={{ backgroundImage: `url(${bgImg})` }}>
-            <div className="hero-content justify-between py-16 px-20 w-11/12 flex lg:flex flex-row-reverse  shadow-2xl" style={{ backgroundImage: `url(${bgImg})` }}>
+            <div className="hero-content justify-between py-16 sm:px-20 md:w-11/12 flex flex-col lg:flex-row   shadow-2xl" style={{ backgroundImage: `url(${bgImg})` }}>
                 <div className="text-center lg:text-left">
                     <img src={img} alt="" />
                 </div>
-                <div className="card w-1/2">
+                <div className="card lg:w-1/2 w-full">
                     <h1 className='text-center text-4xl font-bold'>Register</h1>
                     <form className="card-body" onSubmit={handleRegister}>
                         <div className="form-control">

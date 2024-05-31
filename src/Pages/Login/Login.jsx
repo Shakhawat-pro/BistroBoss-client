@@ -5,22 +5,37 @@ import googleImg from '../../assets/login/google.png'
 import facebookImg from '../../assets/login/facebook.png'
 import gitImg from '../../assets/login/github.png'
 
+import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { useEffect } from 'react';
+
 const Login = () => {
+
+    useEffect(() => {
+        loadCaptchaEnginge(6)
+    }, [])
+
     const handleLogin = e => {
         e.preventDefault()
         const form = e.target
         const email = form.email.value
         const password = form.password.value
-        const info = {name: email, password}
-        console.log(info);
+        const captcha = form.captcha.value
+        
+        if (validateCaptcha(captcha) == true) {
+            const info = { name: email, password }
+            console.log(info); 
+        }
+        else {
+            alert('Captcha Does Not Match');
+        }
     }
     return (
         <div className="hero min-h-screen" style={{ backgroundImage: `url(${bgImg})` }}>
-            <div className="hero-content justify-between py-16 px-20 w-11/12 flex lg:flex   shadow-2xl" style={{ backgroundImage: `url(${bgImg})` }}>
+            <div className="hero-content justify-between py-16 sm:px-20 md:w-11/12 flex flex-col lg:flex-row   shadow-2xl" style={{ backgroundImage: `url(${bgImg})` }}>
                 <div className="text-center lg:text-left">
                     <img src={img} alt="" />
                 </div>
-                <div className="card w-1/2">
+                <div className="card lg:w-1/2 w-full">
                     <h1 className='text-center text-4xl font-bold'>Login</h1>
                     <form className="card-body" onSubmit={handleLogin}>
                         <div className="form-control">
@@ -34,6 +49,12 @@ const Login = () => {
                                 <span className="label-text font-bold">Password</span>
                             </label>
                             <input type="password" name='password' placeholder="password" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <LoadCanvasTemplate />
+                            </label>
+                            <input type="text" name='captcha' placeholder="password" className="input input-bordered" required />
                         </div>
                         <div className="form-control mt-6">
                             <input type="submit" value="Login" className="btn bg-[#D9B682] text-white font-bold text-lg" />
