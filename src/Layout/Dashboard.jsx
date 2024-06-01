@@ -1,18 +1,28 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaAd, FaCalendar, FaHome, FaList, FaSearch, FaShoppingCart } from "react-icons/fa";
+import { FaCalendarAlt, FaHome, FaList, FaShoppingCart, FaShoppingBag, FaUtensils, FaBook, FaUsers  } from "react-icons/fa";
 import { TbLayoutSidebarLeftExpand } from "react-icons/tb";
+import { MdReviews, MdMail } from "react-icons/md";
+import { BiSolidFoodMenu } from "react-icons/bi";
+import { TfiMenuAlt } from "react-icons/tfi";
+
+
 
 import useCart from "../hooks/useCart";
 import './dashboard.css'
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
     const [cart] = useCart();
+
+    //TODO: GET isAdmin from database
+    const [isAdmin] = useAdmin()
+    // console.log(isAdmin);
 
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content ">
-                <label htmlFor="my-drawer-2" className="btn btn-ghost fixed drawer-button text-4xl  lg:hidden"><TbLayoutSidebarLeftExpand/></label>
+                <label htmlFor="my-drawer-2" className="btn btn-ghost fixed drawer-button text-4xl  lg:hidden"><TbLayoutSidebarLeftExpand /></label>
                 <Outlet></Outlet>
             </div>
             <div className="drawer-side">
@@ -22,15 +32,28 @@ const Dashboard = () => {
                         <p className="text-xl font-extrabold">BISTRO BOSS</p>
                         <p className=" tracking-[.3rem] font-semibold">Restaurant</p>
                     </div>
-                    {/* Sidebar content here */}
-                    <li><NavLink className={'flex items-center gap-2'} to="/dashboard/userHome"><FaHome />User Home</NavLink></li>
-                    <li><NavLink className={'flex items-center gap-2'} to="/dashboard/reservation"><FaCalendar />Reservation</NavLink></li>
-                    <li><NavLink className={'flex items-center gap-2'} to="/dashboard/cart"><FaShoppingCart />My Cart ({cart.length})</NavLink></li>
-                    <li><NavLink className={'flex items-center gap-2'} to="/dashboard/review"><FaAd />Add a Review</NavLink></li>
-                    <li><NavLink className={'flex items-center gap-2'} to="/dashboard/bookings"><FaList />My Bookings</NavLink></li>
+                    {
+                        isAdmin ? (<>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/userHome"><FaHome />Admin Home</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/reservation"><FaUtensils />Add Items</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/cart"><TfiMenuAlt />Manage Items</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/review"><FaBook />Manage Bookings</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/users"><FaUsers />All Users</NavLink></li>
+                        </> ) :( <>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/userHome"><FaHome />User Home</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/reservation"><FaCalendarAlt />Reservation</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/cart"><FaShoppingCart />My Cart ({cart.length})</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/review"><MdReviews />Add a Review</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/bookings"><FaList />My Bookings</NavLink></li>
+                        </>)
+                    }
+
+                    {/* Shared NavLink */}
                     <div className="divider"></div>
                     <li><NavLink className={'flex items-center gap-2'} to="/"><FaHome />Home</NavLink></li>
-                    <li><NavLink className={'flex items-center gap-2'} to="/order/salad"><FaSearch />Menu</NavLink></li>
+                    <li><NavLink className={'flex items-center gap-2'} to="/menu"><BiSolidFoodMenu />Menu</NavLink></li>
+                    <li><NavLink className={'flex items-center gap-2'} to="/order"><FaShoppingBag />Shop</NavLink></li>
+                    <li><NavLink className={'flex items-center gap-2'} to="/contact"><MdMail />Contact</NavLink></li>
                 </ul>
 
             </div>

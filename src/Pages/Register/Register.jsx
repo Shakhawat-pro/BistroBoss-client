@@ -1,83 +1,86 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/others/authentication2.png'
 import bgImg from '../../assets/others/bg.png'
-import googleImg from '../../assets/login/google.png'
-import facebookImg from '../../assets/login/facebook.png'
-import gitImg from '../../assets/login/github.png'
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
 import { updateProfile } from 'firebase/auth';
 import Swal from 'sweetalert2'
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 
 const Register = () => {
+    const axiosPublic = useAxiosPublic()
     const { createUser } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data)
+        // Function to create user, update profile, and save user info to the database
         createUser(data.email, data.password)
             .then(result => {
+                // Update user profile with display name and photo URL
                 updateProfile(result.user, {
                     displayName: data.name,
                     photoURL: data.photoURL
-                }).then(result => {
-                    console.log(result);
+                }).then(() => {
+                    // Prepare user information for database
+                    const userInfo = {
+                        name: data.name,
+                        email: data.email
+                    };
+    
+                    // Save user information to the database
+                    axiosPublic.post('/users', userInfo)
+                        .then(res => {
+                            if (res.data.insertedId) {
+                                // Show success message
+                                Swal.fire({
+                                    title: "Sign Up Successful!",
+                                    text: "Your account has been created successfully.",
+                                    icon: "success"
+                                }).then(() => {
+                                    location.state ? navigate(location.state) : navigate('/');
+                                });
+                            }
+                        }).catch(error => {
+                            // Handle error in saving user info to the database
+                            console.error('Error saving user info to database:', error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Sign In Failed',
+                                text: 'Please try again later.',
+                                footer: `<span style="color: red;">${error.message}</span>`
+                            });
+                        });
+                }).catch(error => {
+                    // Handle error in updating user profile
+                    console.error('Error updating profile:', error);
                     Swal.fire({
-                        title: "Sign Up Successful!",
-                        text: "Your account has been created successfully .",
-                        icon: "success"
-                    }).then(() => {
-                        // navigate('/')
-                        {
-                            location.state? navigate(location.state) : navigate('/')
-                        }
-                    })
-                })
-            }
-            )
+                        icon: 'error',
+                        title: 'Sign In Failed',
+                        text: 'Please try again later.',
+                        footer: `<span style="color: red;">${error.message}</span>`
+                    });
+                });
+            }).catch(error => {
+                // Handle error in creating user
+                console.error('Error creating user:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Sign In Failed',
+                    text: 'Please try again later.',
+                    footer: `<span style="color: red;">${error.message}</span>`
+                });
+            });
     }
 
 
-
-
-    // const handleRegister = e => {
-    //     e.preventDefault()
-    //     const form = e.target
-    //     const name = form.name.value
-    //     const photoURL = form.photoURL.value
-    //     const email = form.email.value
-    //     const password = form.password.value
-    //     const info = { name, email, password }
-    //     console.log(info);
-    //     createUser(email, password)
-    //         .then(result => {
-    //             updateProfile(result.user, {
-    //                 displayName: name,
-    //                 photoURL: photoURL
-    //             }).then(result => {
-    //                 console.log(result);
-    //                 Swal.fire({
-    //                     title: "Sign Up Successful!",
-    //                     text: "Your account has been created successfully .",
-    //                     icon: "success"
-    //                 }).then(() => {
-    //                     navigate('/')
-    //                     {
-    //                         // location.state? navigate(location.state) : navigate('/')
-    //                     }
-    //                 })
-    //             })
-    //         }
-
-    //         )
-    // }
     return (
-        <div className="hero min-h-screen" style={{ backgroundImage: `url(${bgImg})` }}>
+        <div className="hero min-h-screen py-16" style={{ backgroundImage: `url(${bgImg})` }}>
             <Helmet>
                 <title>Bistro | Register</title>
             </Helmet>
@@ -130,17 +133,7 @@ const Register = () => {
                     </form>
                     <Link to={'/login'} className='text-center text-[#D9B682]'>Already Register? <span className='font-bold text-[#D1A054]'>Go to Login</span></Link>
                     <p className='text-center font-semibold'>Or sign up with</p>
-                    <div className='flex justify-center gap-5 mt-4'>
-                        <button className='btn btn-circle border-2 border-black p-2'>
-                            <img src={facebookImg} alt="" />
-                        </button>
-                        <button className='btn btn-circle border-2 border-black p-2'>
-                            <img src={googleImg} alt="" />
-                        </button>
-                        <button className='btn btn-circle border-2 border-black p-2'>
-                            <img src={gitImg} alt="" />
-                        </button>
-                    </div>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
