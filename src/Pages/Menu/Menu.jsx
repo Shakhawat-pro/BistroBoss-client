@@ -8,6 +8,7 @@ import soupImg from "../../assets/menu/soup-bg.jpg"
 import useMenu from "../../hooks/useMenu";
 import MenuCategory from "./Menu Category/MenuCategory";
 import SectionTitle from "../../components/SectionTitle";
+import SmoothScroll from "../../components/SmoothScroll";
 
 const Menu = () => {
     const [ menu ] = useMenu()
@@ -19,6 +20,7 @@ const Menu = () => {
 
     return (
         <div>
+            <SmoothScroll></SmoothScroll>
             <Helmet>
                 <title>Bistro | Menu</title>
             </Helmet>
