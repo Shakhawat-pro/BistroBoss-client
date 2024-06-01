@@ -1,7 +1,45 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { AuthContext } from '../../Context/AuthProvider';
+import Swal from "sweetalert2";
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useCart from '../../hooks/useCart';
 
 const FoodCard = ({ item }) => {
-    const { name, price, recipe, image } = item;
+    const { name, price, recipe, image, } = item;
+    const { user } = useContext(AuthContext)
+    const axiosSecure = useAxiosSecure()
+    const [, refetch] = useCart()
+    const handleAddToCart = food => {
+        console.log(food);
+        if (user && user.email) {
+            // console.log(food);
+            const cartItem = {
+                menu: food._id,
+                customerEmail: user.email,
+                name,
+                price,
+                recipe,
+                image
+            }
+            axiosSecure.post('/carts', cartItem)
+            .then(res => {
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${name} added to your cart`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    refetch()
+                }
+            })
+        }
+        else {
+            alert('Please Login')
+        }                 
+    }
 
     return (
         <div className="card rounded-none mx-auto shadow-xl bg-[#F3F3F3]">
@@ -13,7 +51,7 @@ const FoodCard = ({ item }) => {
                 <h2 className="text-xl font-bold">{name}</h2>
                 <p className="text-gray-700">{recipe}</p>
                 <div className="card-actions justify-center mt-4">
-                    <button className="w-24 pb-1 rounded-lg shadow-none text-[#BB8506] border-b-2 border-[#BB8506]">Buy Now</button>
+                    <button onClick={() => handleAddToCart(item)} className="w-24 pb-1 rounded-lg shadow-none text-[#BB8506] border-b-2 border-[#BB8506]">Buy Now</button>
                 </div>
             </div>
         </div>

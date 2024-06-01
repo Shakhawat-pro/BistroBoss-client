@@ -5,8 +5,6 @@ import googleImg from '../../assets/login/google.png'
 import facebookImg from '../../assets/login/facebook.png'
 import gitImg from '../../assets/login/github.png'
 import Swal from 'sweetalert2'
-
-import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
 import { Helmet } from 'react-helmet-async';
@@ -19,9 +17,7 @@ const Login = () => {
 
     const { signInUser, signInWithGoogle } = useContext(AuthContext)
 
-    useEffect(() => {
-        loadCaptchaEnginge(6)
-    }, [])
+
 
 
     const handleLogin = e => {
@@ -29,43 +25,28 @@ const Login = () => {
         const form = e.target
         const email = form.email.value
         const password = form.password.value
-        const captcha = form.captcha.value
-
-        if (validateCaptcha(captcha) == true) {
-            const info = { name: email, password }
-            console.log(info);
-            signInUser(email, password)
-            .then(result => {
-                console.log(result);
-                Swal.fire({
-                    title: "Success!",
-                    text: "You have successfully logged In.",
-                    icon: "success"
-                }).then(() => {
-                    // navigate('/')
-                    {
-                        location.state? navigate(location.state) : navigate('/')
-                    }
-                })
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Sign In Failed',
-                    text: 'Please try again later.',
-                    footer: `<span style="color: red;">${error.message}</span>`
-                });
-            })
-
-        }
-        else {
+        signInUser(email, password)
+        .then(result => {
+            console.log(result);
             Swal.fire({
-                title: "Ops!",
-                text: "Captcha does not match.",
-                icon: "error",
-                confirmButtonText: "Try Again"
+                title: "Success!",
+                text: "You have successfully logged In.",
+                icon: "success"
+            }).then(() => {
+                // navigate('/')
+                {
+                    location.state? navigate(location.state) : navigate('/')
+                }
+            })
+        })
+        .catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Sign In Failed',
+                text: 'Please try again later.',
+                footer: `<span style="color: red;">${error.message}</span>`
             });
-        }
+        })
     }
 
     const handleGoogle = () => {
@@ -115,12 +96,6 @@ const Login = () => {
                                 <span className="label-text font-bold">Password</span>
                             </label>
                             <input type="password" name='password' placeholder="Password" className="input input-bordered" required />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <LoadCanvasTemplate />
-                            </label>
-                            <input type="text" name='captcha' placeholder="Enter Captcha" className="input input-bordered" required />
                         </div>
                         <div className="form-control mt-6">
                             <input type="submit" value="Login" className="btn bg-[#D9B682] text-white font-bold text-lg" />
