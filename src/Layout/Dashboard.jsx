@@ -22,7 +22,7 @@ const Dashboard = () => {
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content ">
-                <label htmlFor="my-drawer-2" className="btn btn-ghost fixed drawer-button text-4xl  lg:hidden"><TbLayoutSidebarLeftExpand /></label>
+                <label htmlFor="my-drawer-2" className="btn btn-ghost fixed drawer-button text-4xl z-50  lg:hidden"><TbLayoutSidebarLeftExpand /></label>
                 <Outlet></Outlet>
             </div>
             <div className="drawer-side">
@@ -35,8 +35,8 @@ const Dashboard = () => {
                     {
                         isAdmin ? (<>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/userHome"><FaHome />Admin Home</NavLink></li>
-                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/reservation"><FaUtensils />Add Items</NavLink></li>
-                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/cart"><TfiMenuAlt />Manage Items</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/addItems"><FaUtensils />Add Items</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/manageItems"><TfiMenuAlt />Manage Items</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/review"><FaBook />Manage Bookings</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/users"><FaUsers />All Users</NavLink></li>
                         </> ) :( <>
