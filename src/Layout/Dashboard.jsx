@@ -42,6 +42,7 @@ const Dashboard = () => {
                         </> ) :( <>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/userHome"><FaHome />User Home</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/reservation"><FaCalendarAlt />Reservation</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/reservation"><FaCalendarAlt />Payment History</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/cart"><FaShoppingCart />My Cart ({cart.length})</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/review"><MdReviews />Add a Review</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/bookings"><FaList />My Bookings</NavLink></li>

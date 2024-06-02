@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import SectionTitle from "../../components/SectionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
-import { MdDeleteForever  } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 
 
@@ -47,7 +48,12 @@ const Cart = () => {
                         <h2>items: {cart.length}</h2>
                         <h2>Total Price: $ {totalPrice}</h2>
                     </div>
-                    <button className="btn bg-[#D1A054] text-white">Pay Now</button>
+                    {cart.length ?
+                        <Link to={'/dashboard/payment'}>
+                            <button disabled={!cart.length} className="btn bg-[#D1A054] text-white">Pay Now</button>
+                        </Link> :
+                        <button disabled={!cart.length} className="btn bg-[#D1A054] text-white">Pay Now</button>
+                    }
                 </div>
                 <div className="overflow-x-auto rounded-t-lg">
                     <table className="table">
@@ -78,7 +84,7 @@ const Cart = () => {
                                     </td>
                                     <td className="text-base font-semibold">${item.price}</td>
                                     <th>
-                                        <button onClick={() => handleDelete(item._id)} className="btn btn-ghost px-0 text-red-600 text-2xl sm:text-5xl "><MdDeleteForever/></button>
+                                        <button onClick={() => handleDelete(item._id)} className="btn btn-ghost px-0 text-red-600 text-2xl sm:text-5xl "><MdDeleteForever /></button>
                                     </th>
                                 </tr>)
                             }
