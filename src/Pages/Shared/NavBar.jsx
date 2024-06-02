@@ -1,19 +1,27 @@
-import {  NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import './navbar.css'
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import useCart from "../../hooks/useCart";
+import useAdmin from "../../hooks/useAdmin";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext)
+    const [isAdmin] = useAdmin()
     const [carts] = useCart()
+    
     const totalPrice = carts.reduce((total, item) => total + item.price, 0);
     // console.log(carts);
 
     const navOptions = <>
         <li><NavLink to="/" className={'px-2'}>Home</NavLink></li>
         <li><NavLink to="/contact" className={'px-2'}>Contact Us</NavLink></li>
-        <li><NavLink to="dashboard" className={'px-2'}>Dashboard</NavLink></li>
+        {
+            user && isAdmin && <li><Link to="/dashboard/adminHome">Dashboard</Link></li>
+        }
+        {
+            user && !isAdmin && <li><Link to="/dashboard/userHome">Dashboard</Link></li>
+        }
         <li><NavLink to="/menu" className={'px-2'}>Our Menu</NavLink></li>
         <li><NavLink to="/order" className={'px-2'}>Order Now</NavLink></li>
         <li><NavLink to="/login" className={'px-2'}>Login</NavLink></li>
@@ -58,7 +66,9 @@ const NavBar = () => {
                                             <span className="font-bold text-lg">{carts.length} Items</span>
                                             <span className="text-info">Subtotal: ${totalPrice}</span>
                                             <div className="card-actions">
-                                                <button className="btn btn-primary btn-block">View cart</button>
+                                                <Link to={'/dashboard/cart'}>
+                                                    <button className="btn btn-primary btn-block">View cart</button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

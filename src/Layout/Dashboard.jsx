@@ -34,15 +34,15 @@ const Dashboard = () => {
                     </div>
                     {
                         isAdmin ? (<>
-                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/userHome"><FaHome />Admin Home</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="adminHome"><FaHome />Admin Home</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/addItems"><FaUtensils />Add Items</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/manageItems"><TfiMenuAlt />Manage Items</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/review"><FaBook />Manage Bookings</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/users"><FaUsers />All Users</NavLink></li>
                         </> ) :( <>
-                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/userHome"><FaHome />User Home</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="userHome"><FaHome />User Home</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/reservation"><FaCalendarAlt />Reservation</NavLink></li>
-                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/reservation"><FaCalendarAlt />Payment History</NavLink></li>
+                            <li><NavLink className={'flex items-center gap-2'} to="/dashboard/paymentHistory"><FaCalendarAlt />Payment History</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/cart"><FaShoppingCart />My Cart ({cart.length})</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/review"><MdReviews />Add a Review</NavLink></li>
                             <li><NavLink className={'flex items-center gap-2'} to="/dashboard/bookings"><FaList />My Bookings</NavLink></li>

@@ -15,7 +15,7 @@ const FoodCard = ({ item }) => {
         if (user && user.email) {
             // console.log(food);
             const cartItem = {
-                menu: food._id,
+                menuId: food._id,
                 customerEmail: user.email,
                 name,
                 price,
@@ -59,12 +59,7 @@ const FoodCard = ({ item }) => {
 };
 
 FoodCard.propTypes = {
-    item: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        recipe: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-    }).isRequired,
+    item: PropTypes.object
 };
 
 export default FoodCard;
