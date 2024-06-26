@@ -103,7 +103,6 @@ const CheckoutForm = () => {
                 }
             }
         }
-
     }
 
     return (
@@ -132,8 +131,7 @@ const CheckoutForm = () => {
                 <button 
                     type="submit" 
                     className="btn btn-primary text-white px-10 py-2 rounded-md bg-blue-500 hover:bg-blue-700 transition-colors duration-300" 
-                    disabled={!stripe || !clientSecret}
-                >
+                    disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
                 {error && <p className="text-red-600">{error}</p>}
